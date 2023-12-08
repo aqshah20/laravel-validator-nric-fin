@@ -46,7 +46,15 @@ class NricFin implements Rule
         for ($i = 1; $i < 8; $i++) {
             $weight += $icArray[$i];
         }
-        $offset = ($icArray[0] === 'T' || $icArray[0] == 'G') ? 4 : 0;
+        
+        if( $icArray[0] === 'T' || $icArray[0] == 'G' ){
+            $offset = 4;    
+        }elseif($icArray[0] === 'M'){
+            $offset = 3;    
+        } else{
+            $offset = 0; 
+        }
+        //$offset = ($icArray[0] === 'T' || $icArray[0] == 'G') ? 4 : 0;
         $temp = ($offset + $weight) % 11;
 
         $st = ['J', 'Z', 'I', 'H', 'G', 'F', 'E', 'D', 'C', 'B', 'A'];
@@ -55,10 +63,10 @@ class NricFin implements Rule
         $theAlpha = '';
         if ($icArray[0] == 'S' || $icArray[0] == 'T') {
             $theAlpha = $st[$temp];
-        } elseif ($icArray[0] == 'F' || $icArray[0] == 'G') {
+        } elseif ($icArray[0] == 'F' || $icArray[0] == 'G' || $icArray[0] == 'M') {
             $theAlpha = $fg[$temp];
         }
-
+        
         return ($icArray[8] === $theAlpha);
     }
 
