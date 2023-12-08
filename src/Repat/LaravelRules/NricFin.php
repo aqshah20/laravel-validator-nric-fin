@@ -46,7 +46,7 @@ class NricFin implements Rule
         for ($i = 1; $i < 8; $i++) {
             $weight += $icArray[$i];
         }
-        
+        // FIN validaition fixed by @aqshah2084
         if( $icArray[0] === 'T' || $icArray[0] == 'G' ){
             $offset = 4;    
         }elseif($icArray[0] === 'M'){
